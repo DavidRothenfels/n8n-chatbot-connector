@@ -164,7 +164,7 @@ const Index = () => {
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
           </svg>
-          Disponic Handbuch
+          Wissensdatenbank öffnen
         </a>
       </div>
 
@@ -184,8 +184,8 @@ const Index = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-8 rounded-xl shadow-lg"
             >
-              <h1 className="text-3xl font-bold mb-2">Willkommen bei Disponic</h1>
-              <p className="text-blue-100">Ihr intelligenter Assistent für Workflow-Automatisierung</p>
+              <h1 className="text-3xl font-bold mb-2">Herzlich Willkommen</h1>
+              <p className="text-blue-100">Ihr Assistent für intelligente Workflow-Automatisierung</p>
             </motion.div>
             
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
@@ -225,7 +225,7 @@ const Index = () => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="text-2xl font-medium mt-2"
                 >
-                  N8N Chat Zugang
+                  Disponic Assistenten-Login
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
@@ -233,7 +233,7 @@ const Index = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="text-gray-500 mt-2"
                 >
-                  Bitte melden Sie sich an, um den Assistenten zu nutzen
+                  Bitte loggen Sie sich ein, um mit dem Assistenten zu chatten
                 </motion.p>
               </div>
               
@@ -355,7 +355,7 @@ const Index = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700"
               >
-                Willkommen bei Disponic, {username}!
+                Hallo {username}, schön dass Sie da sind!
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
@@ -363,7 +363,7 @@ const Index = () => {
                 transition={{ delay: 0.4, duration: 0.5 }}
                 className="text-gray-600 mt-3 text-lg"
               >
-                Ihr persönlicher n8n-Assistent steht Ihnen zur Verfügung. Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um eine Konversation zu starten.
+                Ihr persönlicher Assistent steht Ihnen zur Verfügung. Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um zu starten.
               </motion.p>
               
               <motion.div
@@ -372,9 +372,9 @@ const Index = () => {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="mt-8 p-6 bg-white shadow-md rounded-xl border border-blue-100"
               >
-                <h2 className="text-xl font-medium text-blue-700 mb-2">Hilfreiche Ressourcen</h2>
+                <h2 className="text-xl font-medium text-blue-700 mb-2">Haben Sie Fragen?</h2>
                 <p className="text-gray-600 mb-4">
-                  Nutzen Sie unser umfangreiches Handbuch für detaillierte Anleitungen und Tipps
+                  In unserer Wissensdatenbank finden Sie ausführliche Informationen und Anleitungen
                 </p>
                 <a 
                   href="https://handbuch.disponic.de/" 
@@ -385,7 +385,7 @@ const Index = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
                   </svg>
-                  Disponic Handbuch öffnen
+                  Zur Wissensdatenbank
                 </a>
               </motion.div>
             </div>
