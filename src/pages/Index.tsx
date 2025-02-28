@@ -152,7 +152,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-50">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-gray-50">
+      {/* Disponic Logo and Handbook Link */}
+      <div className="absolute top-4 right-4 flex items-center gap-3">
+        <a 
+          href="https://handbuch.disponic.de/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-blue-700 border border-blue-100"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+          </svg>
+          Disponic Handbuch
+        </a>
+      </div>
+
       <AnimatePresence>
         {!isAuthenticated ? (
           <motion.div
@@ -162,13 +177,24 @@ const Index = () => {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="w-full max-w-md"
           >
+            {/* Welcome Banner */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-8 rounded-xl shadow-lg"
+            >
+              <h1 className="text-3xl font-bold mb-2">Willkommen bei Disponic</h1>
+              <p className="text-blue-100">Ihr intelligenter Assistent für Workflow-Automatisierung</p>
+            </motion.div>
+            
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
               <div className="mb-6 text-center">
                 <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
-                  className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gray-900 to-gray-700 rounded-full flex items-center justify-center"
+                  className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full flex items-center justify-center"
                 >
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
@@ -189,9 +215,9 @@ const Index = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3, duration: 0.5 }}
-                  className="text-xs uppercase tracking-widest text-gray-500 font-medium"
+                  className="text-xs uppercase tracking-widest text-blue-500 font-medium"
                 >
-                  Authentication Required
+                  Anmeldung erforderlich
                 </motion.span>
                 <motion.h1 
                   initial={{ opacity: 0, y: 10 }}
@@ -199,7 +225,7 @@ const Index = () => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="text-2xl font-medium mt-2"
                 >
-                  N8N Chat Access
+                  N8N Chat Zugang
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
@@ -207,7 +233,7 @@ const Index = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="text-gray-500 mt-2"
                 >
-                  Please sign in to use the assistant
+                  Bitte melden Sie sich an, um den Assistenten zu nutzen
                 </motion.p>
               </div>
               
@@ -218,15 +244,15 @@ const Index = () => {
                   transition={{ delay: 0.6, duration: 0.5 }}
                 >
                   <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-                    Username
+                    Benutzername
                   </label>
                   <input
                     id="username"
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your username"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    placeholder="Benutzernamen eingeben"
                     required
                   />
                 </motion.div>
@@ -237,15 +263,15 @@ const Index = () => {
                   transition={{ delay: 0.7, duration: 0.5 }}
                 >
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Password
+                    Passwort
                   </label>
                   <input
                     id="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your password"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    placeholder="Passwort eingeben"
                     required
                   />
                 </motion.div>
@@ -256,9 +282,9 @@ const Index = () => {
                   transition={{ delay: 0.8, duration: 0.5 }}
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gray-900 text-white py-3 rounded-xl hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition-all duration-200 relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 rounded-xl hover:from-blue-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 relative overflow-hidden group"
                 >
-                  <span className={`absolute inset-0 w-0 bg-gray-700 transition-all duration-[400ms] ease-out group-hover:w-full ${isLoading ? 'w-full' : ''}`}></span>
+                  <span className={`absolute inset-0 w-0 bg-blue-800 transition-all duration-[400ms] ease-out group-hover:w-full ${isLoading ? 'w-full' : ''}`}></span>
                   <span className="relative flex items-center justify-center gap-2">
                     {isLoading ? (
                       <>
@@ -266,11 +292,11 @@ const Index = () => {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Signing in...
+                        Anmeldung...
                       </>
                     ) : (
                       <>
-                        Sign in
+                        Anmelden
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -306,12 +332,12 @@ const Index = () => {
                 initial={{ scale: 0.9, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-gray-900 to-gray-700 rounded-full flex items-center justify-center"
+                className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full flex items-center justify-center"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
-                  width="28" 
-                  height="28" 
+                  width="32" 
+                  height="32" 
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 
@@ -327,41 +353,40 @@ const Index = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-2xl font-medium"
+                className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700"
               >
-                Welcome, {username}
+                Willkommen bei Disponic, {username}!
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="text-gray-500 mt-2"
+                className="text-gray-600 mt-3 text-lg"
               >
-                Your n8n chat assistant is ready. Click the chat icon in the bottom right corner to start a conversation.
+                Ihr persönlicher n8n-Assistent steht Ihnen zur Verfügung. Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um eine Konversation zu starten.
               </motion.p>
               
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
-                className="mt-6 p-4 bg-yellow-50 text-yellow-800 rounded-lg"
+                className="mt-8 p-6 bg-white shadow-md rounded-xl border border-blue-100"
               >
-                <p className="text-sm">
-                  <strong>Hinweis:</strong> Falls der Chat-Button nicht erscheint, versuche die Seite zu aktualisieren oder prüfe, ob er möglicherweise durch andere Elemente verdeckt wird.
+                <h2 className="text-xl font-medium text-blue-700 mb-2">Hilfreiche Ressourcen</h2>
+                <p className="text-gray-600 mb-4">
+                  Nutzen Sie unser umfangreiches Handbuch für detaillierte Anleitungen und Tipps
                 </p>
-                <button 
-                  className="mt-2 px-4 py-2 bg-yellow-100 hover:bg-yellow-200 rounded text-sm transition-colors"
-                  onClick={() => {
-                    if (chatInitialized) {
-                      setChatInitialized(false);
-                      setTimeout(() => initializeChat(username, password), 500);
-                    } else {
-                      initializeChat(username, password);
-                    }
-                  }}
+                <a 
+                  href="https://handbuch.disponic.de/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-sm hover:shadow-md"
                 >
-                  Chat neu initialisieren
-                </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                  </svg>
+                  Disponic Handbuch öffnen
+                </a>
               </motion.div>
             </div>
             
@@ -378,7 +403,7 @@ const Index = () => {
                 const chatElements = document.querySelectorAll(".n8n-chat");
                 chatElements.forEach(el => el.remove());
                 
-                toast.info("Du wurdest abgemeldet");
+                toast.info("Sie wurden abgemeldet");
                 
                 // Reload the page to reset everything
                 setTimeout(() => window.location.reload(), 1000);
@@ -393,6 +418,16 @@ const Index = () => {
       
       {/* Container for chat initialization */}
       <div id="n8n-chat-container" className="fixed bottom-0 right-0 w-16 h-16 z-[9999]"></div>
+      
+      {/* Disponic Footer */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute bottom-4 left-0 right-0 text-center text-gray-500 text-sm"
+      >
+        &copy; {new Date().getFullYear()} Disponic - Alle Rechte vorbehalten
+      </motion.div>
     </div>
   );
 };
