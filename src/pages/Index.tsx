@@ -9,6 +9,7 @@ const Index = () => {
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [chatInitialized, setChatInitialized] = useState(false);
   const navigate = useNavigate();
 
   // Check if already authenticated on component mount
@@ -21,10 +22,10 @@ const Index = () => {
         setPassword(storedPassword);
         setIsAuthenticated(true);
         
-        // Small delay to ensure DOM is ready
+        // Initialize chat with a delay to ensure the DOM is ready
         setTimeout(() => {
           initializeChat(storedUsername, storedPassword);
-        }, 500);
+        }, 1000);
       } catch (error) {
         console.error("Error restoring authentication:", error);
         localStorage.removeItem("n8nChatAuth");
@@ -55,10 +56,10 @@ const Index = () => {
         setIsAuthenticated(true);
         toast.success("Login successful");
         
-        // Initialize n8n chat after authentication with a small delay
+        // Initialize n8n chat after authentication with a delay
         setTimeout(() => {
           initializeChat(username, password);
-        }, 500);
+        }, 1000);
       } else {
         toast.error("Invalid credentials");
       }
@@ -71,6 +72,13 @@ const Index = () => {
   };
 
   const initializeChat = (username: string, password: string) => {
+    if (chatInitialized) {
+      console.log("Chat already initialized, skipping...");
+      return;
+    }
+    
+    console.log("Initializing chat with credentials...");
+    
     // Clean up any previous instances
     const oldScript = document.getElementById("n8n-chat-script");
     if (oldScript) {
@@ -92,7 +100,7 @@ const Index = () => {
       import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
       
       try {
-        createChat({
+        const chatInstance = createChat({
           webhookUrl: 'https://dwr.app.n8n.cloud/webhook/53c136fe-3e77-4709-a143-fe82746dd8b6/chat',
           webhookConfig: {
             method: 'POST',
@@ -113,7 +121,25 @@ const Index = () => {
               inputPlaceholder: "Ask me anything...",
             },
           },
+          debug: true // Enable debug mode
         });
+        
+        // Force visibility
+        setTimeout(() => {
+          const chatToggle = document.querySelector('.n8n-chat__toggle');
+          const chatWindow = document.querySelector('.n8n-chat__window');
+          
+          if (chatToggle) {
+            chatToggle.setAttribute('style', 'visibility: visible !important; opacity: 1 !important; display: block !important;');
+          }
+          
+          if (chatWindow) {
+            chatWindow.setAttribute('style', 'z-index: 10000 !important;');
+          }
+          
+          console.log('Chat UI elements enhanced for visibility');
+        }, 2000);
+        
         console.log('Chat initialized successfully');
       } catch (error) {
         console.error('Error initializing chat:', error);
@@ -122,6 +148,7 @@ const Index = () => {
     
     document.body.appendChild(script);
     console.log("Chat script added to DOM");
+    setChatInitialized(true);
   };
 
   return (
@@ -312,6 +339,30 @@ const Index = () => {
               >
                 Your n8n chat assistant is ready. Click the chat icon in the bottom right corner to start a conversation.
               </motion.p>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                className="mt-6 p-4 bg-yellow-50 text-yellow-800 rounded-lg"
+              >
+                <p className="text-sm">
+                  <strong>Hinweis:</strong> Falls der Chat-Button nicht erscheint, versuche die Seite zu aktualisieren oder prüfe, ob er möglicherweise durch andere Elemente verdeckt wird.
+                </p>
+                <button 
+                  className="mt-2 px-4 py-2 bg-yellow-100 hover:bg-yellow-200 rounded text-sm transition-colors"
+                  onClick={() => {
+                    if (chatInitialized) {
+                      setChatInitialized(false);
+                      setTimeout(() => initializeChat(username, password), 500);
+                    } else {
+                      initializeChat(username, password);
+                    }
+                  }}
+                >
+                  Chat neu initialisieren
+                </button>
+              </motion.div>
             </div>
             
             <motion.button
@@ -321,24 +372,27 @@ const Index = () => {
               onClick={() => {
                 localStorage.removeItem("n8nChatAuth");
                 setIsAuthenticated(false);
+                setChatInitialized(false);
                 
                 // Clean up any chat instances
                 const chatElements = document.querySelectorAll(".n8n-chat");
                 chatElements.forEach(el => el.remove());
                 
+                toast.info("Du wurdest abgemeldet");
+                
                 // Reload the page to reset everything
-                window.location.reload();
+                setTimeout(() => window.location.reload(), 1000);
               }}
               className="px-5 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200"
             >
-              Sign Out
+              Abmelden
             </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
       
       {/* Container for chat initialization */}
-      <div id="n8n-chat" className="hidden"></div>
+      <div id="n8n-chat-container" className="fixed bottom-0 right-0 w-16 h-16 z-[9999]"></div>
     </div>
   );
 };
