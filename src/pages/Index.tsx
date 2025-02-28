@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,27 @@ const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Check if already authenticated on component mount
+  useEffect(() => {
+    const authData = localStorage.getItem("n8nChatAuth");
+    if (authData) {
+      try {
+        const [storedUsername, storedPassword] = atob(authData).split(":");
+        setUsername(storedUsername);
+        setPassword(storedPassword);
+        setIsAuthenticated(true);
+        
+        // Small delay to ensure DOM is ready
+        setTimeout(() => {
+          initializeChat(storedUsername, storedPassword);
+        }, 500);
+      } catch (error) {
+        console.error("Error restoring authentication:", error);
+        localStorage.removeItem("n8nChatAuth");
+      }
+    }
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,8 +55,10 @@ const Index = () => {
         setIsAuthenticated(true);
         toast.success("Login successful");
         
-        // Initialize n8n chat after authentication
-        initializeChat(username, password);
+        // Initialize n8n chat after authentication with a small delay
+        setTimeout(() => {
+          initializeChat(username, password);
+        }, 500);
       } else {
         toast.error("Invalid credentials");
       }
@@ -48,51 +71,58 @@ const Index = () => {
   };
 
   const initializeChat = (username: string, password: string) => {
+    // Clean up any previous instances
+    const oldScript = document.getElementById("n8n-chat-script");
+    if (oldScript) {
+      oldScript.remove();
+    }
+    
+    // Clean up any existing chat instances
+    const chatElements = document.querySelectorAll(".n8n-chat");
+    chatElements.forEach(el => el.remove());
+    
+    // Create the authorization header
     const authHeader = `Basic ${btoa(username + ":" + password)}`;
     
-    // Load the n8n chat script dynamically
+    // Create and append script
     const script = document.createElement("script");
+    script.id = "n8n-chat-script";
     script.type = "module";
     script.innerHTML = `
       import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
       
-      createChat({
-        webhookUrl: 'https://dwr.app.n8n.cloud/webhook/53c136fe-3e77-4709-a143-fe82746dd8b6/chat',
-        webhookConfig: {
-          method: 'POST',
-          headers: {
-            'Authorization': '${authHeader}'
-          }
-        },
-        mode: 'window',
-        initialMessages: [
-          'Welcome ${username}! 👋',
-          'How can I assist you today?'
-        ],
-        i18n: {
-          en: {
-            title: 'N8N Assistant',
-            subtitle: "Your AI-powered workflow assistant",
-            inputPlaceholder: "Ask me anything...",
+      try {
+        createChat({
+          webhookUrl: 'https://dwr.app.n8n.cloud/webhook/53c136fe-3e77-4709-a143-fe82746dd8b6/chat',
+          webhookConfig: {
+            method: 'POST',
+            headers: {
+              'Authorization': '${authHeader}',
+              'Content-Type': 'application/json'
+            }
           },
-        },
-      });
+          mode: 'window',
+          initialMessages: [
+            'Welcome ${username}! 👋',
+            'How can I assist you today?'
+          ],
+          i18n: {
+            en: {
+              title: 'N8N Assistant',
+              subtitle: "Your AI-powered workflow assistant",
+              inputPlaceholder: "Ask me anything...",
+            },
+          },
+        });
+        console.log('Chat initialized successfully');
+      } catch (error) {
+        console.error('Error initializing chat:', error);
+      }
     `;
     
     document.body.appendChild(script);
+    console.log("Chat script added to DOM");
   };
-
-  // Check if already authenticated on component mount
-  useState(() => {
-    const authData = localStorage.getItem("n8nChatAuth");
-    if (authData) {
-      const [storedUsername, storedPassword] = atob(authData).split(":");
-      setUsername(storedUsername);
-      setPassword(storedPassword);
-      setIsAuthenticated(true);
-      initializeChat(storedUsername, storedPassword);
-    }
-  });
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gray-50">
@@ -291,7 +321,12 @@ const Index = () => {
               onClick={() => {
                 localStorage.removeItem("n8nChatAuth");
                 setIsAuthenticated(false);
-                // Reload the page to reset the chat widget
+                
+                // Clean up any chat instances
+                const chatElements = document.querySelectorAll(".n8n-chat");
+                chatElements.forEach(el => el.remove());
+                
+                // Reload the page to reset everything
                 window.location.reload();
               }}
               className="px-5 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200"
@@ -302,7 +337,7 @@ const Index = () => {
         )}
       </AnimatePresence>
       
-      {/* Hidden container for chat initialization */}
+      {/* Container for chat initialization */}
       <div id="n8n-chat" className="hidden"></div>
     </div>
   );
