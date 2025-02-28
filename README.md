@@ -1,69 +1,53 @@
-# Welcome to your Lovable project
 
-## Project info
+# N8N Chat Connector
+
+This project integrates an n8n chat widget into a modern web application with authentication. Users must log in before accessing the chat functionality.
+
+## Features
+
+- Clean, minimalist design inspired by Apple's design principles
+- Authentication system to protect access to the chat
+- Seamless integration with n8n chat widget
+- Smooth animations and transitions for an enhanced user experience
+- Responsive layout that works on all device sizes
+
+## Project Info
 
 **URL**: https://lovable.dev/projects/ad17285b-b624-4700-95cb-d09080da544f
 
-## How can I edit this code?
+## n8n Chat Configuration
 
-There are several ways of editing your application.
+The application connects to an n8n chat webhook endpoint. Before using the application, ensure that:
 
-**Use Lovable**
+1. Your n8n workflow with a Chat Trigger node is active
+2. The webhook URL in the application matches your n8n Chat Trigger node's webhook URL
+3. The Chat Trigger node has the appropriate authentication settings configured
+4. Your domain is added to the Allowed Origins (CORS) field in the Chat Trigger node settings
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ad17285b-b624-4700-95cb-d09080da544f) and start prompting.
+## Technologies Used
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
 - React
-- shadcn-ui
+- TypeScript
 - Tailwind CSS
+- Framer Motion for animations
+- n8n Chat API
 
-## How can I deploy this project?
+## Getting Started
 
-Simply open [Lovable](https://lovable.dev/projects/ad17285b-b624-4700-95cb-d09080da544f) and click on Share -> Publish.
+1. Clone this repository
+2. Install dependencies with `npm install`
+3. Start the development server with `npm run dev`
+4. Open your browser to the local development URL
 
-## I want to use a custom domain - is that possible?
+## Authentication
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+This demo uses a simplified authentication system. In a production environment, you should replace it with proper backend authentication.
+
+The current implementation:
+- Stores credentials in localStorage (for demo purposes only)
+- Passes credentials to the n8n Chat widget for basic authentication
+- Provides a simple login/logout flow
+
+## Customization
+
+You can customize the appearance of the n8n Chat widget by modifying the CSS variables in `src/index.css`. The application uses a clean, minimal design language that you can adapt to your brand.
