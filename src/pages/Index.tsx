@@ -12,7 +12,7 @@ const Index = () => {
   const [chatInitialized, setChatInitialized] = useState(false);
   const navigate = useNavigate();
 
-  // Check if already authenticated on component mount
+  // Authentifizierung beim Laden der Komponente prüfen
   useEffect(() => {
     const authData = localStorage.getItem("n8nChatAuth");
     if (authData) {
@@ -22,12 +22,12 @@ const Index = () => {
         setPassword(storedPassword);
         setIsAuthenticated(true);
         
-        // Initialize chat with a delay to ensure the DOM is ready
+        // Chat mit Verzögerung initialisieren, um sicherzustellen, dass DOM bereit ist
         setTimeout(() => {
           initializeChat(storedUsername, storedPassword);
         }, 1000);
       } catch (error) {
-        console.error("Error restoring authentication:", error);
+        console.error("Fehler bei der Wiederherstellung der Authentifizierung:", error);
         localStorage.removeItem("n8nChatAuth");
       }
     }
@@ -38,34 +38,34 @@ const Index = () => {
     setIsLoading(true);
     
     try {
-      // Simulate authentication delay
+      // Authentifizierungsverzögerung simulieren
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      // Basic validation
+      // Grundlegende Validierung
       if (!username.trim() || !password.trim()) {
-        toast.error("Please enter both username and password");
+        toast.error("Bitte geben Sie Benutzernamen und Passwort ein");
         setIsLoading(false);
         return;
       }
       
-      // In a real app, you would verify credentials with a backend
-      // For this example, we're just checking if fields are filled
+      // In einer echten App würden Sie die Anmeldedaten mit einem Backend überprüfen
+      // Für dieses Beispiel prüfen wir nur, ob die Felder ausgefüllt sind
       if (username && password) {
-        // Store authentication in localStorage for persistence
+        // Authentifizierung im localStorage für Persistenz speichern
         localStorage.setItem("n8nChatAuth", btoa(`${username}:${password}`));
         setIsAuthenticated(true);
-        toast.success("Login successful");
+        toast.success("Anmeldung erfolgreich");
         
-        // Initialize n8n chat after authentication with a delay
+        // N8n-Chat nach Authentifizierung mit Verzögerung initialisieren
         setTimeout(() => {
           initializeChat(username, password);
         }, 1000);
       } else {
-        toast.error("Invalid credentials");
+        toast.error("Ungültige Anmeldedaten");
       }
     } catch (error) {
-      console.error("Login error:", error);
-      toast.error("An error occurred during login");
+      console.error("Anmeldefehler:", error);
+      toast.error("Bei der Anmeldung ist ein Fehler aufgetreten");
     } finally {
       setIsLoading(false);
     }
@@ -73,26 +73,26 @@ const Index = () => {
 
   const initializeChat = (username: string, password: string) => {
     if (chatInitialized) {
-      console.log("Chat already initialized, skipping...");
+      console.log("Chat bereits initialisiert, überspringe...");
       return;
     }
     
-    console.log("Initializing chat with credentials...");
+    console.log("Initialisiere Chat mit Anmeldedaten...");
     
-    // Clean up any previous instances
+    // Frühere Instanzen bereinigen
     const oldScript = document.getElementById("n8n-chat-script");
     if (oldScript) {
       oldScript.remove();
     }
     
-    // Clean up any existing chat instances
+    // Vorhandene Chat-Instanzen bereinigen
     const chatElements = document.querySelectorAll(".n8n-chat");
     chatElements.forEach(el => el.remove());
     
-    // Create the authorization header
+    // Autorisierungs-Header erstellen
     const authHeader = `Basic ${btoa(username + ":" + password)}`;
     
-    // Create and append script
+    // Script erstellen und anhängen
     const script = document.createElement("script");
     script.id = "n8n-chat-script";
     script.type = "module";
@@ -111,20 +111,20 @@ const Index = () => {
           },
           mode: 'window',
           initialMessages: [
-            'Welcome! 👋',
-            'How can I assist you today?'
+            'Willkommen! 👋',
+            'Wie kann ich Ihnen heute helfen?'
           ],
           i18n: {
-            en: {
-              title: 'AI Assistant',
-              subtitle: "Your AI-powered assistant",
-              inputPlaceholder: "Ask me anything...",
+            de: {
+              title: 'Wissensassistent',
+              subtitle: "Ihr KI-gestützter Assistent",
+              inputPlaceholder: "Fragen Sie mich etwas...",
             },
           },
-          debug: true // Enable debug mode
+          debug: true // Debug-Modus aktivieren
         });
         
-        // Force visibility
+        // Sichtbarkeit erzwingen
         setTimeout(() => {
           const chatToggle = document.querySelector('.n8n-chat__toggle');
           const chatWindow = document.querySelector('.n8n-chat__window');
@@ -137,23 +137,23 @@ const Index = () => {
             chatWindow.setAttribute('style', 'z-index: 10000 !important;');
           }
           
-          console.log('Chat UI elements enhanced for visibility');
+          console.log('Chat-UI-Elemente für bessere Sichtbarkeit angepasst');
         }, 2000);
         
-        console.log('Chat initialized successfully');
+        console.log('Chat erfolgreich initialisiert');
       } catch (error) {
-        console.error('Error initializing chat:', error);
+        console.error('Fehler bei der Chat-Initialisierung:', error);
       }
     `;
     
     document.body.appendChild(script);
-    console.log("Chat script added to DOM");
+    console.log("Chat-Script zum DOM hinzugefügt");
     setChatInitialized(true);
   };
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-gray-50">
-      {/* Knowledge Base Link */}
+      {/* Wissensdatenbank-Link */}
       <div className="absolute top-4 right-4 flex items-center gap-3">
         <a 
           href="#" 
@@ -164,7 +164,7 @@ const Index = () => {
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
           </svg>
-          Knowledge Base
+          Wissensdatenbank
         </a>
       </div>
 
@@ -177,15 +177,15 @@ const Index = () => {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="w-full max-w-md"
           >
-            {/* Welcome Banner */}
+            {/* Willkommensbanner */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               className="mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-8 rounded-xl shadow-lg"
             >
-              <h1 className="text-3xl font-bold mb-2">Welcome</h1>
-              <p className="text-blue-100">Your AI-powered workflow assistant</p>
+              <h1 className="text-3xl font-bold mb-2">Willkommen</h1>
+              <p className="text-blue-100">Ihr KI-gesteuerter Wissensassistent</p>
             </motion.div>
             
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
@@ -217,7 +217,7 @@ const Index = () => {
                   transition={{ delay: 0.3, duration: 0.5 }}
                   className="text-xs uppercase tracking-widest text-blue-500 font-medium"
                 >
-                  Login Required
+                  Anmeldung erforderlich
                 </motion.span>
                 <motion.h1 
                   initial={{ opacity: 0, y: 10 }}
@@ -225,7 +225,7 @@ const Index = () => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="text-2xl font-medium mt-2"
                 >
-                  AI Assistant Login
+                  Wissensassistent Login
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
@@ -233,7 +233,7 @@ const Index = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="text-gray-500 mt-2"
                 >
-                  Please log in to chat with the assistant
+                  Bitte melden Sie sich an, um mit dem Assistenten zu chatten
                 </motion.p>
               </div>
               
@@ -244,7 +244,7 @@ const Index = () => {
                   transition={{ delay: 0.6, duration: 0.5 }}
                 >
                   <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-                    Username
+                    Benutzername
                   </label>
                   <input
                     id="username"
@@ -252,7 +252,7 @@ const Index = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your username"
+                    placeholder="Geben Sie Ihren Benutzernamen ein"
                     required
                   />
                 </motion.div>
@@ -263,7 +263,7 @@ const Index = () => {
                   transition={{ delay: 0.7, duration: 0.5 }}
                 >
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Password
+                    Passwort
                   </label>
                   <input
                     id="password"
@@ -271,7 +271,7 @@ const Index = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Enter your password"
+                    placeholder="Geben Sie Ihr Passwort ein"
                     required
                   />
                 </motion.div>
@@ -292,11 +292,11 @@ const Index = () => {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Logging in...
+                        Anmelden...
                       </>
                     ) : (
                       <>
-                        Login
+                        Anmelden
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -334,10 +334,10 @@ const Index = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 mb-6"
               >
-                Welcome to Your AI Assistant Demo
+                Willkommen bei Ihrem Wissensassistenten
               </motion.h1>
 
-              {/* FAQ Section */}
+              {/* FAQ-Bereich */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -345,43 +345,43 @@ const Index = () => {
                 className="text-left grid md:grid-cols-2 gap-6 mt-8"
               >
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                  <h2 className="text-xl font-medium text-blue-700 mb-4">Frequently Asked Questions</h2>
+                  <h2 className="text-xl font-medium text-blue-700 mb-4">Häufig gestellte Fragen</h2>
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">How can I integrate this AI assistant with my website?</h3>
-                      <p className="text-gray-600">Our AI assistant can be easily integrated with any website through our JavaScript SDK. Simply add a few lines of code to your website and your customers can start interacting with the AI.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Wie kann ich diesen Wissensassistenten in meine Webseite integrieren?</h3>
+                      <p className="text-gray-600">Unser Wissensassistent kann ganz einfach über unser JavaScript SDK in jede Webseite integriert werden. Fügen Sie einfach einige Codezeilen zu Ihrer Webseite hinzu, und Ihre Kunden können mit der KI interagieren.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Can I customize the appearance of the chat widget?</h3>
-                      <p className="text-gray-600">Yes, you can fully customize the chat widget to match your brand colors, fonts, and overall design. Our SDK provides extensive styling options.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Kann ich das Erscheinungsbild des Chat-Widgets anpassen?</h3>
+                      <p className="text-gray-600">Ja, Sie können das Chat-Widget vollständig an Ihre Markenfarben, Schriftarten und das Gesamtdesign anpassen. Unser SDK bietet umfangreiche Styling-Optionen.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">How does the AI learn about my business?</h3>
-                      <p className="text-gray-600">The AI can be trained on your company's documentation, knowledge base, and previous customer interactions to provide accurate and relevant responses.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Wie lernt die KI über mein Unternehmen?</h3>
+                      <p className="text-gray-600">Die KI kann auf Ihrer Unternehmensdokumentation, Wissensdatenbank und früheren Kundeninteraktionen trainiert werden, um genaue und relevante Antworten zu liefern.</p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                  <h2 className="text-xl font-medium text-blue-700 mb-4">Key Features</h2>
+                  <h2 className="text-xl font-medium text-blue-700 mb-4">Hauptfunktionen</h2>
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">24/7 Customer Support</h3>
-                      <p className="text-gray-600">Provide round-the-clock customer support without increasing your team size. The AI can handle common queries and escalate complex issues to human agents when necessary.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">24/7 Kundensupport</h3>
+                      <p className="text-gray-600">Bieten Sie rund um die Uhr Kundensupport an, ohne Ihr Team zu vergrößern. Die KI kann häufige Anfragen bearbeiten und komplexe Probleme bei Bedarf an menschliche Mitarbeiter eskalieren.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Multi-language Support</h3>
-                      <p className="text-gray-600">Our AI assistant can communicate with your customers in multiple languages, breaking down language barriers and expanding your global reach.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Mehrsprachiger Support</h3>
+                      <p className="text-gray-600">Unser KI-Assistent kann mit Ihren Kunden in mehreren Sprachen kommunizieren, Sprachbarrieren abbauen und Ihre globale Reichweite erweitern.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Analytics Dashboard</h3>
-                      <p className="text-gray-600">Gain insights into customer queries, satisfaction levels, and AI performance through our comprehensive analytics dashboard.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Analytik-Dashboard</h3>
+                      <p className="text-gray-600">Gewinnen Sie Einblicke in Kundenanfragen, Zufriedenheitsniveaus und KI-Leistung durch unser umfassendes Analytik-Dashboard.</p>
                     </div>
                   </div>
                 </div>
@@ -393,9 +393,9 @@ const Index = () => {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="mt-8 p-6 bg-white shadow-md rounded-xl border border-blue-100"
               >
-                <h2 className="text-xl font-medium text-blue-700 mb-2">Try the Demo</h2>
+                <h2 className="text-xl font-medium text-blue-700 mb-2">Testen Sie die Demo</h2>
                 <p className="text-gray-600 mb-4">
-                  Click on the chat icon in the bottom right corner to start interacting with our AI assistant.
+                  Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit unserem KI-Assistenten zu interagieren.
                 </p>
                 <div className="flex justify-center mt-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 animate-bounce">
@@ -414,38 +414,37 @@ const Index = () => {
                 setIsAuthenticated(false);
                 setChatInitialized(false);
                 
-                // Clean up any chat instances
+                // Chat-Instanzen bereinigen
                 const chatElements = document.querySelectorAll(".n8n-chat");
                 chatElements.forEach(el => el.remove());
                 
-                toast.info("You have been logged out");
+                toast.info("Sie wurden abgemeldet");
                 
-                // Reload the page to reset everything
+                // Seite neu laden, um alles zurückzusetzen
                 setTimeout(() => window.location.reload(), 1000);
               }}
               className="px-5 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200"
             >
-              Logout
+              Abmelden
             </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
       
-      {/* Container for chat initialization */}
+      {/* Container für Chat-Initialisierung */}
       <div id="n8n-chat-container" className="fixed bottom-0 right-0 w-16 h-16 z-[9999]"></div>
       
-      {/* Footer */}
+      {/* Fußzeile */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
         className="absolute bottom-4 left-0 right-0 text-center text-gray-500 text-sm"
       >
-        &copy; {new Date().getFullYear()} AI Assistant Demo - All rights reserved
+        &copy; {new Date().getFullYear()} KI-Wissensassistent - Alle Rechte vorbehalten
       </motion.div>
     </div>
   );
 };
 
 export default Index;
-
