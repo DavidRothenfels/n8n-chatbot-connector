@@ -89,7 +89,7 @@ const Index = () => {
       
       try {
         const chatInstance = createChat({
-          webhookUrl: 'https://dwr.app.n8n.cloud/webhook/53c136fe-3e77-4709-a143-fe82746dd8b6/chat',
+          webhookUrl: '',
           webhookConfig: {
             method: 'POST',
             headers: {
@@ -97,26 +97,25 @@ const Index = () => {
               'Content-Type': 'application/json'
             }
           },
+          target: '#n8n-chat-container',
           mode: 'window',
+          chatInputKey: 'chatInput',
+          chatSessionKey: 'sessionId',
+          metadata: {},
+          showWelcomeScreen: false,
+          defaultLanguage: 'en',
           initialMessages: [
-            'Willkommen! 👋',
-            'Wie kann ich Ihnen heute helfen?'
+            'Hi there! 👋',
+            'My name is Nathan. How can I assist you today?'
           ],
           i18n: {
-            locale: 'de',
-            title: 'Wissensassistent',
-            subtitle: "Ihr KI-gestützter Assistent",
-            inputPlaceholder: "Fragen Sie mich etwas...",
-            initialMessages: [
-              'Willkommen! 👋',
-              'Wie kann ich Ihnen heute helfen?'
-            ],
-            loadingText: 'Lade...',
-            todayText: 'Heute',
-            yesterdayText: 'Gestern',
-            sendButtonLabel: 'Senden',
-            newChatButtonLabel: 'Neuer Chat',
-            errorMessage: 'Beim Laden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.'
+            en: {
+              title: 'Hi there! 👋',
+              subtitle: "Start a chat. We're here to help you 24/7.",
+              footer: '',
+              getStarted: 'New Conversation',
+              inputPlaceholder: 'Type your question..',
+            },
           },
           debug: true
         });
