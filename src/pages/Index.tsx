@@ -111,13 +111,13 @@ const Index = () => {
           },
           mode: 'window',
           initialMessages: [
-            'Welcome ${username}! 👋',
+            'Welcome! 👋',
             'How can I assist you today?'
           ],
           i18n: {
             en: {
-              title: 'N8N Assistant',
-              subtitle: "Your AI-powered workflow assistant",
+              title: 'AI Assistant',
+              subtitle: "Your AI-powered assistant",
               inputPlaceholder: "Ask me anything...",
             },
           },
@@ -153,10 +153,10 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-gray-50">
-      {/* Disponic Logo and Handbook Link */}
+      {/* Knowledge Base Link */}
       <div className="absolute top-4 right-4 flex items-center gap-3">
         <a 
-          href="https://handbuch.disponic.de/" 
+          href="#" 
           target="_blank" 
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-blue-700 border border-blue-100"
@@ -164,7 +164,7 @@ const Index = () => {
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
           </svg>
-          Wissensdatenbank öffnen
+          Knowledge Base
         </a>
       </div>
 
@@ -184,8 +184,8 @@ const Index = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-8 rounded-xl shadow-lg"
             >
-              <h1 className="text-3xl font-bold mb-2">Herzlich Willkommen</h1>
-              <p className="text-blue-100">Ihr Assistent für intelligente Workflow-Automatisierung</p>
+              <h1 className="text-3xl font-bold mb-2">Welcome</h1>
+              <p className="text-blue-100">Your AI-powered workflow assistant</p>
             </motion.div>
             
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
@@ -217,7 +217,7 @@ const Index = () => {
                   transition={{ delay: 0.3, duration: 0.5 }}
                   className="text-xs uppercase tracking-widest text-blue-500 font-medium"
                 >
-                  Anmeldung erforderlich
+                  Login Required
                 </motion.span>
                 <motion.h1 
                   initial={{ opacity: 0, y: 10 }}
@@ -225,7 +225,7 @@ const Index = () => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="text-2xl font-medium mt-2"
                 >
-                  Disponic Assistenten-Login
+                  AI Assistant Login
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
@@ -233,7 +233,7 @@ const Index = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="text-gray-500 mt-2"
                 >
-                  Bitte loggen Sie sich ein, um mit dem Assistenten zu chatten
+                  Please log in to chat with the assistant
                 </motion.p>
               </div>
               
@@ -244,7 +244,7 @@ const Index = () => {
                   transition={{ delay: 0.6, duration: 0.5 }}
                 >
                   <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-                    Benutzername
+                    Username
                   </label>
                   <input
                     id="username"
@@ -252,7 +252,7 @@ const Index = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Benutzernamen eingeben"
+                    placeholder="Enter your username"
                     required
                   />
                 </motion.div>
@@ -263,7 +263,7 @@ const Index = () => {
                   transition={{ delay: 0.7, duration: 0.5 }}
                 >
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                    Passwort
+                    Password
                   </label>
                   <input
                     id="password"
@@ -271,7 +271,7 @@ const Index = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Passwort eingeben"
+                    placeholder="Enter your password"
                     required
                   />
                 </motion.div>
@@ -292,11 +292,11 @@ const Index = () => {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Anmeldung...
+                        Logging in...
                       </>
                     ) : (
                       <>
-                        Anmelden
+                        Login
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -325,46 +325,67 @@ const Index = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-xl text-center"
+            className="w-full max-w-5xl text-center"
           >
             <div className="mb-8">
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-full flex items-center justify-center"
-              >
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  width="32" 
-                  height="32" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  className="text-white"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                </svg>
-              </motion.div>
               <motion.h1 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700"
+                className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 mb-6"
               >
-                Hallo {username}, schön dass Sie da sind!
+                Welcome to Your AI Assistant Demo
               </motion.h1>
-              <motion.p 
+
+              {/* FAQ Section */}
+              <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                className="text-gray-600 mt-3 text-lg"
+                className="text-left grid md:grid-cols-2 gap-6 mt-8"
               >
-                Ihr persönlicher Assistent steht Ihnen zur Verfügung. Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um zu starten.
-              </motion.p>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                  <h2 className="text-xl font-medium text-blue-700 mb-4">Frequently Asked Questions</h2>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="font-medium text-gray-800 mb-2">How can I integrate this AI assistant with my website?</h3>
+                      <p className="text-gray-600">Our AI assistant can be easily integrated with any website through our JavaScript SDK. Simply add a few lines of code to your website and your customers can start interacting with the AI.</p>
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-medium text-gray-800 mb-2">Can I customize the appearance of the chat widget?</h3>
+                      <p className="text-gray-600">Yes, you can fully customize the chat widget to match your brand colors, fonts, and overall design. Our SDK provides extensive styling options.</p>
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-medium text-gray-800 mb-2">How does the AI learn about my business?</h3>
+                      <p className="text-gray-600">The AI can be trained on your company's documentation, knowledge base, and previous customer interactions to provide accurate and relevant responses.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                  <h2 className="text-xl font-medium text-blue-700 mb-4">Key Features</h2>
+                  
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="font-medium text-gray-800 mb-2">24/7 Customer Support</h3>
+                      <p className="text-gray-600">Provide round-the-clock customer support without increasing your team size. The AI can handle common queries and escalate complex issues to human agents when necessary.</p>
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-medium text-gray-800 mb-2">Multi-language Support</h3>
+                      <p className="text-gray-600">Our AI assistant can communicate with your customers in multiple languages, breaking down language barriers and expanding your global reach.</p>
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-medium text-gray-800 mb-2">Analytics Dashboard</h3>
+                      <p className="text-gray-600">Gain insights into customer queries, satisfaction levels, and AI performance through our comprehensive analytics dashboard.</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
               
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
@@ -372,21 +393,15 @@ const Index = () => {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="mt-8 p-6 bg-white shadow-md rounded-xl border border-blue-100"
               >
-                <h2 className="text-xl font-medium text-blue-700 mb-2">Haben Sie Fragen?</h2>
+                <h2 className="text-xl font-medium text-blue-700 mb-2">Try the Demo</h2>
                 <p className="text-gray-600 mb-4">
-                  In unserer Wissensdatenbank finden Sie ausführliche Informationen und Anleitungen
+                  Click on the chat icon in the bottom right corner to start interacting with our AI assistant.
                 </p>
-                <a 
-                  href="https://handbuch.disponic.de/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-sm hover:shadow-md"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                <div className="flex justify-center mt-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 animate-bounce">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
                   </svg>
-                  Zur Wissensdatenbank
-                </a>
+                </div>
               </motion.div>
             </div>
             
@@ -403,14 +418,14 @@ const Index = () => {
                 const chatElements = document.querySelectorAll(".n8n-chat");
                 chatElements.forEach(el => el.remove());
                 
-                toast.info("Sie wurden abgemeldet");
+                toast.info("You have been logged out");
                 
                 // Reload the page to reset everything
                 setTimeout(() => window.location.reload(), 1000);
               }}
               className="px-5 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200"
             >
-              Abmelden
+              Logout
             </motion.button>
           </motion.div>
         )}
@@ -419,17 +434,18 @@ const Index = () => {
       {/* Container for chat initialization */}
       <div id="n8n-chat-container" className="fixed bottom-0 right-0 w-16 h-16 z-[9999]"></div>
       
-      {/* Disponic Footer */}
+      {/* Footer */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
         className="absolute bottom-4 left-0 right-0 text-center text-gray-500 text-sm"
       >
-        &copy; {new Date().getFullYear()} Disponic - Alle Rechte vorbehalten
+        &copy; {new Date().getFullYear()} AI Assistant Demo - All rights reserved
       </motion.div>
     </div>
   );
 };
 
 export default Index;
+
