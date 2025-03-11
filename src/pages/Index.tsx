@@ -103,11 +103,20 @@ const Index = () => {
             'Wie kann ich Ihnen heute helfen?'
           ],
           i18n: {
-            de: {
-              title: 'Wissensassistent',
-              subtitle: "Ihr KI-gestützter Assistent",
-              inputPlaceholder: "Fragen Sie mich etwas...",
-            },
+            locale: 'de',
+            title: 'Wissensassistent',
+            subtitle: "Ihr KI-gestützter Assistent",
+            inputPlaceholder: "Fragen Sie mich etwas...",
+            initialMessages: [
+              'Willkommen! 👋',
+              'Wie kann ich Ihnen heute helfen?'
+            ],
+            loadingText: 'Lade...',
+            todayText: 'Heute',
+            yesterdayText: 'Gestern',
+            sendButtonLabel: 'Senden',
+            newChatButtonLabel: 'Neuer Chat',
+            errorMessage: 'Beim Laden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.'
           },
           debug: true
         });
