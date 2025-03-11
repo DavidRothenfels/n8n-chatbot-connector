@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { BookOpen, FileQuestion, LogOut, Upload, Image } from "lucide-react";
 
 const Index = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +12,6 @@ const Index = () => {
   const [chatInitialized, setChatInitialized] = useState(false);
   const navigate = useNavigate();
 
-  // Authentifizierung beim Laden der Komponente prüfen
   useEffect(() => {
     const authData = localStorage.getItem("n8nChatAuth");
     if (authData) {
@@ -22,7 +21,6 @@ const Index = () => {
         setPassword(storedPassword);
         setIsAuthenticated(true);
         
-        // Chat mit Verzögerung initialisieren, um sicherzustellen, dass DOM bereit ist
         setTimeout(() => {
           initializeChat(storedUsername, storedPassword);
         }, 1000);
@@ -38,25 +36,19 @@ const Index = () => {
     setIsLoading(true);
     
     try {
-      // Authentifizierungsverzögerung simulieren
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      // Grundlegende Validierung
       if (!username.trim() || !password.trim()) {
         toast.error("Bitte geben Sie Benutzernamen und Passwort ein");
         setIsLoading(false);
         return;
       }
       
-      // In einer echten App würden Sie die Anmeldedaten mit einem Backend überprüfen
-      // Für dieses Beispiel prüfen wir nur, ob die Felder ausgefüllt sind
       if (username && password) {
-        // Authentifizierung im localStorage für Persistenz speichern
         localStorage.setItem("n8nChatAuth", btoa(`${username}:${password}`));
         setIsAuthenticated(true);
         toast.success("Anmeldung erfolgreich");
         
-        // N8n-Chat nach Authentifizierung mit Verzögerung initialisieren
         setTimeout(() => {
           initializeChat(username, password);
         }, 1000);
@@ -79,20 +71,16 @@ const Index = () => {
     
     console.log("Initialisiere Chat mit Anmeldedaten...");
     
-    // Frühere Instanzen bereinigen
     const oldScript = document.getElementById("n8n-chat-script");
     if (oldScript) {
       oldScript.remove();
     }
     
-    // Vorhandene Chat-Instanzen bereinigen
     const chatElements = document.querySelectorAll(".n8n-chat");
     chatElements.forEach(el => el.remove());
     
-    // Autorisierungs-Header erstellen
     const authHeader = `Basic ${btoa(username + ":" + password)}`;
     
-    // Script erstellen und anhängen
     const script = document.createElement("script");
     script.id = "n8n-chat-script";
     script.type = "module";
@@ -121,10 +109,9 @@ const Index = () => {
               inputPlaceholder: "Fragen Sie mich etwas...",
             },
           },
-          debug: true // Debug-Modus aktivieren
+          debug: true
         });
         
-        // Sichtbarkeit erzwingen
         setTimeout(() => {
           const chatToggle = document.querySelector('.n8n-chat__toggle');
           const chatWindow = document.querySelector('.n8n-chat__window');
@@ -151,9 +138,21 @@ const Index = () => {
     setChatInitialized(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("n8nChatAuth");
+    setIsAuthenticated(false);
+    setChatInitialized(false);
+    
+    const chatElements = document.querySelectorAll(".n8n-chat");
+    chatElements.forEach(el => el.remove());
+    
+    toast.info("Sie wurden abgemeldet");
+    
+    setTimeout(() => window.location.reload(), 1000);
+  };
+
   return (
     <div className="min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-blue-50 to-gray-50">
-      {/* Wissensdatenbank-Link */}
       <div className="absolute top-4 right-4 flex items-center gap-3">
         <a 
           href="#" 
@@ -161,12 +160,22 @@ const Index = () => {
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-blue-700 border border-blue-100"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-          </svg>
-          Wissensdatenbank
+          <BookOpen size={20} />
+          Handbücher
         </a>
       </div>
+      
+      {isAuthenticated && (
+        <div className="absolute top-4 left-4">
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 text-red-600 border border-red-100"
+          >
+            <LogOut size={18} />
+            Abmelden
+          </button>
+        </div>
+      )}
 
       <AnimatePresence>
         {!isAuthenticated ? (
@@ -177,7 +186,6 @@ const Index = () => {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="w-full max-w-md"
           >
-            {/* Willkommensbanner */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -337,7 +345,6 @@ const Index = () => {
                 Willkommen bei Ihrem Wissensassistenten
               </motion.h1>
 
-              {/* FAQ-Bereich */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -345,43 +352,54 @@ const Index = () => {
                 className="text-left grid md:grid-cols-2 gap-6 mt-8"
               >
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                  <h2 className="text-xl font-medium text-blue-700 mb-4">Häufig gestellte Fragen</h2>
+                  <h2 className="text-xl font-medium text-blue-700 mb-4 flex items-center gap-2">
+                    <FileQuestion size={22} />
+                    Häufig gestellte Fragen
+                  </h2>
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Wie kann ich diesen Wissensassistenten in meine Webseite integrieren?</h3>
-                      <p className="text-gray-600">Unser Wissensassistent kann ganz einfach über unser JavaScript SDK in jede Webseite integriert werden. Fügen Sie einfach einige Codezeilen zu Ihrer Webseite hinzu, und Ihre Kunden können mit der KI interagieren.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Wie kann ich Dokumentationen in den Assistenten einbinden?</h3>
+                      <p className="text-gray-600">Der Wissensassistent kann Ihre vorhandenen Handbücher, Anleitungen und Wissensdatenbanken analysieren und darauf basierend präzise Antworten liefern. Laden Sie einfach Ihre Dokumente hoch oder verknüpfen Sie bestehende Ressourcen.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Kann ich das Erscheinungsbild des Chat-Widgets anpassen?</h3>
-                      <p className="text-gray-600">Ja, Sie können das Chat-Widget vollständig an Ihre Markenfarben, Schriftarten und das Gesamtdesign anpassen. Unser SDK bietet umfangreiche Styling-Optionen.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Kann der Assistent Bildschirmfotos interpretieren?</h3>
+                      <p className="text-gray-600">Ja, der KI-Assistent kann Screenshots und Bildschirmfotos analysieren, um Benutzern bei bestimmten Bedienschritten zu helfen. Dies ist besonders nützlich für die Erstellung von visuell unterstützten Anleitungen und Software-Handbüchern.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Wie lernt die KI über mein Unternehmen?</h3>
-                      <p className="text-gray-600">Die KI kann auf Ihrer Unternehmensdokumentation, Wissensdatenbank und früheren Kundeninteraktionen trainiert werden, um genaue und relevante Antworten zu liefern.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Wie aktuell sind die Informationen im Assistenten?</h3>
+                      <p className="text-gray-600">Der Wissensassistent wird regelmäßig mit den neuesten Dokumentationen aktualisiert. Zudem kann er auf Ihre eigenen Wissensdatenbanken zugreifen und diese in Echtzeit für Antworten nutzen.</p>
                     </div>
                   </div>
                 </div>
                 
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                  <h2 className="text-xl font-medium text-blue-700 mb-4">Hauptfunktionen</h2>
+                  <h2 className="text-xl font-medium text-blue-700 mb-4 flex items-center gap-2">
+                    <BookOpen size={22} />
+                    Anwendungsfälle für Handbücher
+                  </h2>
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">24/7 Kundensupport</h3>
-                      <p className="text-gray-600">Bieten Sie rund um die Uhr Kundensupport an, ohne Ihr Team zu vergrößern. Die KI kann häufige Anfragen bearbeiten und komplexe Probleme bei Bedarf an menschliche Mitarbeiter eskalieren.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Software-Dokumentation</h3>
+                      <p className="text-gray-600">Konvertieren Sie komplexe Softwarehandbücher in einen interaktiven Assistenten, der Benutzer durch spezifische Bildschirme und Funktionen führt. Benutzer können Screenshots hochladen und Echtzeit-Hilfe zu bestimmten Funktionen erhalten.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Mehrsprachiger Support</h3>
-                      <p className="text-gray-600">Unser KI-Assistent kann mit Ihren Kunden in mehreren Sprachen kommunizieren, Sprachbarrieren abbauen und Ihre globale Reichweite erweitern.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Visuelle Hilfestellung</h3>
+                      <p className="text-gray-600">Nutzer können Bildschirmfotos hochladen, wenn sie bei einem bestimmten Schritt nicht weiterkommen. Der Assistent analysiert das Bild und gibt kontextbezogene Hilfestellung und Handlungsempfehlungen.</p>
+                      <div className="mt-2 flex items-center gap-2 text-blue-600">
+                        <Upload size={16} />
+                        <Image size={16} />
+                        <span className="text-sm">Bildanalyse unterstützt Screenshots und Diagramme</span>
+                      </div>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Analytik-Dashboard</h3>
-                      <p className="text-gray-600">Gewinnen Sie Einblicke in Kundenanfragen, Zufriedenheitsniveaus und KI-Leistung durch unser umfassendes Analytik-Dashboard.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Interne Wissensdatenbank</h3>
+                      <p className="text-gray-600">Verwandeln Sie Ihre internen Dokumente, Prozesse und Anleitungen in eine durchsuchbare und gesprächsfähige Wissensdatenbank, die Ihren Mitarbeitern rund um die Uhr zur Verfügung steht.</p>
                     </div>
                   </div>
                 </div>
@@ -395,7 +413,8 @@ const Index = () => {
               >
                 <h2 className="text-xl font-medium text-blue-700 mb-2">Testen Sie die Demo</h2>
                 <p className="text-gray-600 mb-4">
-                  Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit unserem KI-Assistenten zu interagieren.
+                  Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit unserem KI-Assistenten zu interagieren. 
+                  Fragen Sie nach spezifischen Bildschirmen, Funktionen oder laden Sie einen Screenshot hoch.
                 </p>
                 <div className="flex justify-center mt-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 animate-bounce">
@@ -404,37 +423,12 @@ const Index = () => {
                 </div>
               </motion.div>
             </div>
-            
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              onClick={() => {
-                localStorage.removeItem("n8nChatAuth");
-                setIsAuthenticated(false);
-                setChatInitialized(false);
-                
-                // Chat-Instanzen bereinigen
-                const chatElements = document.querySelectorAll(".n8n-chat");
-                chatElements.forEach(el => el.remove());
-                
-                toast.info("Sie wurden abgemeldet");
-                
-                // Seite neu laden, um alles zurückzusetzen
-                setTimeout(() => window.location.reload(), 1000);
-              }}
-              className="px-5 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200"
-            >
-              Abmelden
-            </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
       
-      {/* Container für Chat-Initialisierung */}
       <div id="n8n-chat-container" className="fixed bottom-0 right-0 w-16 h-16 z-[9999]"></div>
       
-      {/* Fußzeile */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
