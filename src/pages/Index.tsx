@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -103,18 +104,18 @@ const Index = () => {
           chatSessionKey: 'sessionId',
           metadata: {},
           showWelcomeScreen: false,
-          defaultLanguage: 'en',
+          defaultLanguage: 'de',
           initialMessages: [
-            'Hi there! 👋',
-            'My name is Nathan. How can I assist you today?'
+            'Hallo! 👋',
+            'Mein Name ist Nathan. Wie kann ich Ihnen heute helfen?'
           ],
           i18n: {
-            en: {
-              title: 'Hi there! 👋',
-              subtitle: "Start a chat. We're here to help you 24/7.",
+            de: {
+              title: 'Hallo! 👋',
+              subtitle: "Starten Sie einen Chat. Wir sind rund um die Uhr für Sie da.",
               footer: '',
-              getStarted: 'New Conversation',
-              inputPlaceholder: 'Type your question..',
+              getStarted: 'Neue Unterhaltung',
+              inputPlaceholder: 'Stellen Sie Ihre Frage..',
             },
           },
           debug: true
