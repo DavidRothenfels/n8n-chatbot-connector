@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -106,13 +105,12 @@ const Index = () => {
           showWelcomeScreen: false,
           defaultLanguage: 'de',
           initialMessages: [
-            'Hallo! 👋',
-            'Mein Name ist Nathan. Wie kann ich Ihnen heute helfen?'
+            'Hallo! Wie kann ich Ihnen heute helfen?'
           ],
           i18n: {
             de: {
-              title: 'Hallo! 👋',
-              subtitle: "Starten Sie einen Chat. Wir sind rund um die Uhr für Sie da.",
+              title: 'Hallo!',
+              subtitle: "Wie kann ich Ihnen heute helfen?",
               footer: '',
               getStarted: 'Neue Unterhaltung',
               inputPlaceholder: 'Stellen Sie Ihre Frage..',
