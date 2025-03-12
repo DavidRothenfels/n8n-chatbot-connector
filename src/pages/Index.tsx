@@ -1,8 +1,9 @@
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, FileQuestion, LogOut, Upload, Image } from "lucide-react";
+import { BookOpen, FileQuestion, LogOut, Upload, Image, BarChart3, PaintBucket, FileText } from "lucide-react";
 
 const Index = () => {
   const [username, setUsername] = useState("");
@@ -200,7 +201,7 @@ const Index = () => {
               className="mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-8 rounded-xl shadow-lg"
             >
               <h1 className="text-3xl font-bold mb-2">Willkommen</h1>
-              <p className="text-blue-100">Ihr KI-gesteuerter Wissensassistent</p>
+              <p className="text-blue-100">Ihr Fachspezifischer Wissens-Chatbot</p>
             </motion.div>
             
             <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
@@ -240,7 +241,7 @@ const Index = () => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="text-2xl font-medium mt-2"
                 >
-                  Wissensassistent Login
+                  Wissens-Chatbot Login
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
@@ -349,7 +350,7 @@ const Index = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 mb-6"
               >
-                Willkommen bei Ihrem Wissensassistenten
+                Willkommen bei Ihrem Fachspezifischen Wissens-Chatbot
               </motion.h1>
 
               <motion.div
@@ -361,23 +362,28 @@ const Index = () => {
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                   <h2 className="text-xl font-medium text-blue-700 mb-4 flex items-center gap-2">
                     <FileQuestion size={22} />
-                    Häufig gestellte Fragen
+                    Produktbeschreibung
                   </h2>
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Wie kann ich Dokumentationen in den Assistenten einbinden?</h3>
-                      <p className="text-gray-600">Der Wissensassistent kann Ihre vorhandenen Handbücher, Anleitungen und Wissensdatenbanken analysieren und darauf basierend präzise Antworten liefern. Laden Sie einfach Ihre Dokumente hoch oder verknüpfen Sie bestehende Ressourcen.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Chatbot für Fachwissen</h3>
+                      <p className="text-gray-600">Ein spezialisierter Chatbot, der fachspezifisches Wissen vermittelt. Verfügbar als Webseite mit Login oder zur Integration in Ihre eigene Webseite.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Kann der Assistent Bildschirmfotos interpretieren?</h3>
-                      <p className="text-gray-600">Ja, der KI-Assistent kann Screenshots und Bildschirmfotos analysieren, um Benutzern bei bestimmten Bedienschritten zu helfen. Dies ist besonders nützlich für die Erstellung von visuell unterstützten Anleitungen und Software-Handbüchern.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Vielseitige Anwendungen</h3>
+                      <p className="text-gray-600">Ideal für Handbücher, FAQs, Anleitungen und ähnliche Dokumentationen. Verarbeitet Texte, Bilder und Prozessabläufe für eine umfassende Wissensvermittlung.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Wie aktuell sind die Informationen im Assistenten?</h3>
-                      <p className="text-gray-600">Der Wissensassistent wird regelmäßig mit den neuesten Dokumentationen aktualisiert. Zudem kann er auf Ihre eigenen Wissensdatenbanken zugreifen und diese in Echtzeit für Antworten nutzen.</p>
+                      <h3 className="font-medium text-gray-800 mb-2">Bildschirmfoto-Analyse</h3>
+                      <p className="text-gray-600">Nutzer können eigene Bildschirmfotos übermitteln und dazu Fragen stellen. Die KI kann Fotos von Anwendungen verarbeiten und spezifische Handlungsanweisungen geben.</p>
+                      <div className="mt-2 flex items-center gap-2 text-blue-600">
+                        <Upload size={16} />
+                        <Image size={16} />
+                        <span className="text-sm">Bildanalyse und Schritt-für-Schritt-Anleitung</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -385,28 +391,32 @@ const Index = () => {
                 <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                   <h2 className="text-xl font-medium text-blue-700 mb-4 flex items-center gap-2">
                     <BookOpen size={22} />
-                    Anwendungsfälle für Handbücher
+                    Funktionen & Vorteile
                   </h2>
                   
                   <div className="space-y-6">
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Software-Dokumentation</h3>
-                      <p className="text-gray-600">Konvertieren Sie komplexe Softwarehandbücher in einen interaktiven Assistenten, der Benutzer durch spezifische Bildschirme und Funktionen führt. Benutzer können Screenshots hochladen und Echtzeit-Hilfe zu bestimmten Funktionen erhalten.</p>
+                      <h3 className="font-medium text-gray-800 mb-2 flex items-center gap-2">
+                        <BarChart3 size={18} />
+                        Datenanalyse und Statistiken
+                      </h3>
+                      <p className="text-gray-600">Detaillierte Auswertungen zu häufigsten Problemursachen und am meisten gesuchten Themen ermöglichen kontinuierliche Verbesserung der Wissensbasis.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Visuelle Hilfestellung</h3>
-                      <p className="text-gray-600">Nutzer können Bildschirmfotos hochladen, wenn sie bei einem bestimmten Schritt nicht weiterkommen. Der Assistent analysiert das Bild und gibt kontextbezogene Hilfestellung und Handlungsempfehlungen.</p>
-                      <div className="mt-2 flex items-center gap-2 text-blue-600">
-                        <Upload size={16} />
-                        <Image size={16} />
-                        <span className="text-sm">Bildanalyse unterstützt Screenshots und Diagramme</span>
-                      </div>
+                      <h3 className="font-medium text-gray-800 mb-2 flex items-center gap-2">
+                        <PaintBucket size={18} />
+                        Anpassbare Gestaltung
+                      </h3>
+                      <p className="text-gray-600">Farben und Texte können an Ihre Corporate Identity angepasst werden, um eine nahtlose Integration in Ihre bestehende digitale Präsenz zu gewährleisten.</p>
                     </div>
                     
                     <div>
-                      <h3 className="font-medium text-gray-800 mb-2">Interne Wissensdatenbank</h3>
-                      <p className="text-gray-600">Verwandeln Sie Ihre internen Dokumente, Prozesse und Anleitungen in eine durchsuchbare und gesprächsfähige Wissensdatenbank, die Ihren Mitarbeitern rund um die Uhr zur Verfügung steht.</p>
+                      <h3 className="font-medium text-gray-800 mb-2 flex items-center gap-2">
+                        <FileText size={18} />
+                        Wissensintegration
+                      </h3>
+                      <p className="text-gray-600">Integrieren Sie Ihre vorhandenen Dokumente und Wissensdatenbanken, um einen leistungsstarken, fachspezifischen Assistenten zu erstellen, der Ihr Unternehmenswissen optimal nutzbar macht.</p>
                     </div>
                   </div>
                 </div>
@@ -418,10 +428,10 @@ const Index = () => {
                 transition={{ delay: 0.5, duration: 0.5 }}
                 className="mt-8 p-6 bg-white shadow-md rounded-xl border border-blue-100"
               >
-                <h2 className="text-xl font-medium text-blue-700 mb-2">Testen Sie die Demo</h2>
+                <h2 className="text-xl font-medium text-blue-700 mb-2">Testen Sie den Chat</h2>
                 <p className="text-gray-600 mb-4">
-                  Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit unserem KI-Assistenten zu interagieren. 
-                  Fragen Sie nach spezifischen Bildschirmen, Funktionen oder laden Sie einen Screenshot hoch.
+                  Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit unserem Wissens-Chatbot zu interagieren. 
+                  Fragen Sie nach spezifischen Anleitungen oder laden Sie einen Screenshot hoch.
                 </p>
                 <div className="flex justify-center mt-4">
                   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 animate-bounce">
@@ -442,7 +452,7 @@ const Index = () => {
         transition={{ delay: 1, duration: 0.5 }}
         className="absolute bottom-4 left-0 right-0 text-center text-gray-500 text-sm"
       >
-        &copy; {new Date().getFullYear()} KI-Wissensassistent - Alle Rechte vorbehalten
+        &copy; {new Date().getFullYear()} Fachspezifischer Wissens-Chatbot - Alle Rechte vorbehalten
       </motion.div>
     </div>
   );
