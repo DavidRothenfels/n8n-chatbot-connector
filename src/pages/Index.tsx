@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { BookOpen, FileQuestion, LogOut, Upload, Image, BarChart3, PaintBucket, FileText } from "lucide-react";
+import { BookOpen, FileQuestion, LogOut, Upload, Image, BarChart3, PaintBucket, FileText, Mail, FileCheck } from "lucide-react";
 
 const Index = () => {
   const [username, setUsername] = useState("");
@@ -414,29 +413,16 @@ const Index = () => {
                     <div>
                       <h3 className="font-medium text-gray-800 mb-2 flex items-center gap-2">
                         <FileText size={18} />
-                        Wissensintegration
+                        Integration weiterer Funktionen
                       </h3>
-                      <p className="text-gray-600">Integrieren Sie Ihre vorhandenen Dokumente und Wissensdatenbanken, um einen leistungsstarken, fachspezifischen Assistenten zu erstellen, der Ihr Unternehmenswissen optimal nutzbar macht.</p>
+                      <p className="text-gray-600">Die Funktionalitäten des Chatbot können erweitert werden. Es können z.B. Emails mit Hinweisen ausgelöst oder Dokumente erstellt werden.</p>
+                      <div className="mt-2 flex items-center gap-2 text-blue-600">
+                        <Mail size={16} />
+                        <FileCheck size={16} />
+                        <span className="text-sm">Automatisierte Prozesse und Dokumentenerstellung</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-              
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="mt-8 p-6 bg-white shadow-md rounded-xl border border-blue-100"
-              >
-                <h2 className="text-xl font-medium text-blue-700 mb-2">Testen Sie den Chat</h2>
-                <p className="text-gray-600 mb-4">
-                  Klicken Sie auf das Chat-Symbol in der unteren rechten Ecke, um mit unserem Wissens-Chatbot zu interagieren. 
-                  Fragen Sie nach spezifischen Anleitungen oder laden Sie einen Screenshot hoch.
-                </p>
-                <div className="flex justify-center mt-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600 animate-bounce">
-                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-                  </svg>
                 </div>
               </motion.div>
             </div>
@@ -445,15 +431,6 @@ const Index = () => {
       </AnimatePresence>
       
       <div id="n8n-chat-container" className="fixed bottom-0 right-0 w-16 h-16 z-[9999]"></div>
-      
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="absolute bottom-4 left-0 right-0 text-center text-gray-500 text-sm"
-      >
-        &copy; {new Date().getFullYear()} Fachspezifischer Wissens-Chatbot - Alle Rechte vorbehalten
-      </motion.div>
     </div>
   );
 };
