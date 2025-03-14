@@ -72,6 +72,7 @@ const Index = () => {
     
     console.log("Initialisiere Chat mit Anmeldedaten...");
     
+    // Remove old script and chat elements
     const oldScript = document.getElementById("n8n-chat-script");
     if (oldScript) {
       oldScript.remove();
@@ -80,7 +81,22 @@ const Index = () => {
     const chatElements = document.querySelectorAll(".n8n-chat");
     chatElements.forEach(el => el.remove());
     
+    // Add CSS for n8n chat
+    const linkElement = document.createElement("link");
+    linkElement.rel = "stylesheet";
+    linkElement.href = "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css";
+    document.head.appendChild(linkElement);
+    
+    // Basic auth header
     const authHeader = `Basic ${btoa(username + ":" + password)}`;
+    
+    // Create chat container if it doesn't exist
+    let chatContainer = document.getElementById("n8n-chat-container");
+    if (!chatContainer) {
+      chatContainer = document.createElement("div");
+      chatContainer.id = "n8n-chat-container";
+      document.body.appendChild(chatContainer);
+    }
     
     const script = document.createElement("script");
     script.id = "n8n-chat-script";
@@ -90,6 +106,7 @@ const Index = () => {
       
       try {
         const chatInstance = createChat({
+          // Use empty string for webhookUrl since we're using the current URL as the endpoint
           webhookUrl: '',
           webhookConfig: {
             method: 'POST',
@@ -124,36 +141,10 @@ const Index = () => {
               inputPlaceholder: 'Ask your question..',
             }
           },
-          debug: true,
-          showInputField: true
+          debug: true
         });
         
-        // Make sure UI elements are visible and properly styled
-        setTimeout(() => {
-          const chatToggle = document.querySelector('.n8n-chat__toggle');
-          const chatWindow = document.querySelector('.n8n-chat__window');
-          const chatInput = document.querySelector('.n8n-chat__input');
-          const chatInputTextarea = document.querySelector('.n8n-chat__input textarea');
-          
-          if (chatToggle) {
-            chatToggle.setAttribute('style', 'visibility: visible !important; opacity: 1 !important; display: block !important;');
-          }
-          
-          if (chatWindow) {
-            chatWindow.setAttribute('style', 'z-index: 10000 !important;');
-          }
-          
-          if (chatInput) {
-            chatInput.setAttribute('style', 'display: flex !important; opacity: 1 !important; visibility: visible !important;');
-          }
-          
-          if (chatInputTextarea) {
-            chatInputTextarea.setAttribute('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
-          }
-          
-          console.log('Chat-UI-Elemente für bessere Sichtbarkeit angepasst');
-        }, 2000);
-        
+        window.chatInstance = chatInstance;
         console.log('Chat erfolgreich initialisiert');
       } catch (error) {
         console.error('Fehler bei der Chat-Initialisierung:', error);
@@ -162,6 +153,48 @@ const Index = () => {
     
     document.body.appendChild(script);
     console.log("Chat-Script zum DOM hinzugefügt");
+    
+    // Ensure chat widget is visible
+    setTimeout(() => {
+      const style = document.createElement('style');
+      style.innerHTML = `
+        .n8n-chat {
+          z-index: 9999 !important;
+          position: fixed !important;
+          bottom: 20px !important;
+          right: 20px !important;
+          display: block !important;
+        }
+        .n8n-chat__toggle {
+          visibility: visible !important;
+          opacity: 1 !important;
+          display: block !important;
+        }
+        .n8n-chat__window {
+          z-index: 10000 !important;
+          height: 600px !important;
+          width: 400px !important;
+        }
+        .n8n-chat__input {
+          display: flex !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+        .n8n-chat__input textarea {
+          display: block !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+        .n8n-chat__footer {
+          display: flex !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+      `;
+      document.head.appendChild(style);
+      console.log("Zusätzliche Stile für Chat-Widget hinzugefügt");
+    }, 1000);
+    
     setChatInitialized(true);
   };
 
