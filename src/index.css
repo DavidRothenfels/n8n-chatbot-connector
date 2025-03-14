@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -225,8 +224,26 @@ html {
 .n8n-chat__toggle {
   visibility: visible !important;
   opacity: 1 !important;
+  display: block !important;
 }
 
 .n8n-chat__window {
   z-index: 10000 !important;
+}
+
+.n8n-chat__input {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.n8n-chat__input textarea {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.n8n-chat__footer {
+  display: flex !important;
+  opacity: 1 !important;
 }

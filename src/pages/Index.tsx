@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -127,10 +128,12 @@ const Index = () => {
           showInputField: true
         });
         
+        // Make sure UI elements are visible and properly styled
         setTimeout(() => {
           const chatToggle = document.querySelector('.n8n-chat__toggle');
           const chatWindow = document.querySelector('.n8n-chat__window');
           const chatInput = document.querySelector('.n8n-chat__input');
+          const chatInputTextarea = document.querySelector('.n8n-chat__input textarea');
           
           if (chatToggle) {
             chatToggle.setAttribute('style', 'visibility: visible !important; opacity: 1 !important; display: block !important;');
@@ -141,7 +144,11 @@ const Index = () => {
           }
           
           if (chatInput) {
-            chatInput.setAttribute('style', 'display: flex !important;');
+            chatInput.setAttribute('style', 'display: flex !important; opacity: 1 !important; visibility: visible !important;');
+          }
+          
+          if (chatInputTextarea) {
+            chatInputTextarea.setAttribute('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
           }
           
           console.log('Chat-UI-Elemente für bessere Sichtbarkeit angepasst');
