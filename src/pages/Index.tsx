@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -199,7 +200,7 @@ const Index = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-6 px-8 rounded-xl shadow-lg"
             >
-              <h1 className="text-3xl font-bold mb-2">Willkommen</h1>
+              <h1 className="text-3xl font-bold mb-2">Chatbot für Handbücher/FAQ und mehr</h1>
               <p className="text-blue-100">Ihr Fachspezifischer Wissens-Chatbot</p>
             </motion.div>
             
@@ -240,7 +241,7 @@ const Index = () => {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="text-2xl font-medium mt-2"
                 >
-                  Wissens-Chatbot Login
+                  Chatbot-Zugang
                 </motion.h1>
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
@@ -248,7 +249,7 @@ const Index = () => {
                   transition={{ delay: 0.5, duration: 0.5 }}
                   className="text-gray-500 mt-2"
                 >
-                  Bitte melden Sie sich an, um mit dem Assistenten zu chatten
+                  Melden Sie sich an, um Ihr Unternehmenswissen zu nutzen
                 </motion.p>
               </div>
               
@@ -267,7 +268,7 @@ const Index = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Geben Sie Ihren Benutzernamen ein"
+                    placeholder="Ihren Benutzernamen eingeben"
                     required
                   />
                 </motion.div>
@@ -286,7 +287,7 @@ const Index = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="Geben Sie Ihr Passwort ein"
+                    placeholder="Ihr Passwort eingeben"
                     required
                   />
                 </motion.div>
@@ -311,7 +312,7 @@ const Index = () => {
                       </>
                     ) : (
                       <>
-                        Anmelden
+                        Jetzt anmelden
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
@@ -349,7 +350,7 @@ const Index = () => {
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700 mb-6"
               >
-                Willkommen bei Ihrem Fachspezifischen Wissens-Chatbot
+                Chatbot für Handbücher/FAQ und mehr
               </motion.h1>
 
               <motion.div
