@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -116,13 +115,22 @@ const Index = () => {
               getStarted: 'Neue Unterhaltung',
               inputPlaceholder: 'Stellen Sie Ihre Frage..',
             },
+            en: {
+              title: 'Hello!',
+              subtitle: "How can I help you today?",
+              footer: '',
+              getStarted: 'New Conversation',
+              inputPlaceholder: 'Ask your question..',
+            }
           },
-          debug: true
+          debug: true,
+          showInputField: true
         });
         
         setTimeout(() => {
           const chatToggle = document.querySelector('.n8n-chat__toggle');
           const chatWindow = document.querySelector('.n8n-chat__window');
+          const chatInput = document.querySelector('.n8n-chat__input');
           
           if (chatToggle) {
             chatToggle.setAttribute('style', 'visibility: visible !important; opacity: 1 !important; display: block !important;');
@@ -130,6 +138,10 @@ const Index = () => {
           
           if (chatWindow) {
             chatWindow.setAttribute('style', 'z-index: 10000 !important;');
+          }
+          
+          if (chatInput) {
+            chatInput.setAttribute('style', 'display: flex !important;');
           }
           
           console.log('Chat-UI-Elemente für bessere Sichtbarkeit angepasst');
