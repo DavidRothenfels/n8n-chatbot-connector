@@ -1,0 +1,92 @@
+/* Disponic theme for n8n chat - using CSS variables and direct styles */
+
+:root {
+  /* Primary color customization */
+  --chat--color-primary: #f9b135;
+  --chat--color-primary-shade-50: #fac25f;
+  --chat--color-primary-shade-100: #fbd388;
+  
+  /* Text and background colors */
+  --chat--color-secondary: #3a3a3a;
+  --chat--color-white: #ffffff;
+  --chat--color-light: #feeccd;
+  
+  /* Header styling */
+  --chat--header--background: var(--chat--color-primary);
+  --chat--header--color: var(--chat--color-secondary);
+  
+  /* Message styling */
+  --chat--message--bot--background: var(--chat--color-light);
+  --chat--message--bot--color: var(--chat--color-secondary);
+  --chat--message--user--background: var(--chat--color-secondary);
+  --chat--message--user--color: var(--chat--color-white);
+  
+  /* Toggle button styling */
+  --chat--toggle--background: var(--chat--color-primary);
+  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+  --chat--toggle--active--background: var(--chat--color-primary-shade-100);
+  --chat--toggle--color: var(--chat--color-secondary);
+}
+
+/* Direct styling with high specificity selectors as a fallback */
+html body .n8n-chat__toggle {
+  background-color: #f9b135 !important;
+  color: #3a3a3a !important;
+}
+
+html body .n8n-chat__toggle:hover {
+  background-color: #fac25f !important;
+}
+
+html body .n8n-chat__toggle:active {
+  background-color: #fbd388 !important;
+}
+
+html body .n8n-chat__header {
+  background-color: #f9b135 !important;
+  color: #3a3a3a !important;
+}
+
+html body .n8n-chat__message--bot {
+  background-color: #feeccd !important;
+  color: #3a3a3a !important;
+}
+
+html body .n8n-chat__message--user {
+  background-color: #3a3a3a !important;
+  color: #ffffff !important;
+}
+
+/* General chat container styling */
+.n8n-chat {
+  z-index: 9999 !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  display: block !important;
+}
+
+.n8n-chat__window {
+  z-index: 10000 !important;
+  height: 600px !important;
+  width: 400px !important;
+}
+
+/* Ensure input and footer are visible */
+.n8n-chat__input {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.n8n-chat__input textarea {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.n8n-chat__footer {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

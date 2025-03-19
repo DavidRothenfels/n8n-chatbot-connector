@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    
+    /* n8n Chat Widget Styles - Disponic Colors */
+    --chat--color-primary: #f9b135; /* Disponic primary orange-yellow */
+    --chat--color-primary-shade-50: #fac25f; /* Lighter shade */
+    --chat--color-primary-shade-100: #fbd388; /* Even lighter shade */
+    --chat--color-secondary: #3a3a3a; /* Disponic dark gray from text color */
+    --chat--color-secondary-shade-50: #505050; /* Lighter shade of dark gray */
+    --chat--color-white: #ffffff;
+    --chat--color-light: #feeccd; /* Light cream/orange background from sidebar */
+    --chat--color-light-shade-50: #fff4e0;
+    --chat--color-light-shade-100: #fff9ee;
+    --chat--color-medium: #767676;
+    --chat--color-dark: #3a3a3a; /* Disponic dark gray */
+    --chat--color-disabled: #bbbbbb;
+    --chat--color-typing: #3a3a3a;
+
+    --chat--spacing: 1rem;
+    --chat--border-radius: 0.75rem;
+    --chat--transition-duration: 0.3s;
+
+    --chat--window--width: 380px;
+    --chat--window--height: 600px;
+
+    --chat--header-height: auto;
+    --chat--header--padding: var(--chat--spacing);
+    --chat--header--background: var(--chat--color-primary);
+    --chat--header--color: var(--chat--color-secondary);
+    --chat--header--border-top: none;
+    --chat--header--border-bottom: none;
+    --chat--heading--font-size: 1.5em;
+    --chat--subtitle--font-size: 0.9em;
+    --chat--subtitle--line-height: 1.5;
+
+    --chat--textarea--height: 50px;
+
+    --chat--message--font-size: 0.95rem;
+    --chat--message--padding: var(--chat--spacing);
+    --chat--message--border-radius: var(--chat--border-radius);
+    --chat--message-line-height: 1.6;
+    --chat--message--bot--background: var(--chat--color-light);
+    --chat--message--bot--color: var(--chat--color-dark);
+    --chat--message--bot--border: none;
+    --chat--message--user--background: var(--chat--color-secondary);
+    --chat--message--user--color: var(--chat--color-white);
+    --chat--message--user--border: none;
+    --chat--message--pre--background: rgba(0, 0, 0, 0.05);
+
+    --chat--toggle--background: var(--chat--color-primary);
+    --chat--toggle--hover--background: #fac25f;
+    --chat--toggle--active--background: #fbd388;
+    --chat--toggle--color: var(--chat--color-secondary);
+    --chat--toggle--size: 56px;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.appearance-none:focus {
+  outline: none;
+}
+
+/* Add custom animation for page transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Subtle loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Ensure n8n chat is visible */
+.n8n-chat {
+  z-index: 9999 !important;
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  display: block !important;
+}
+
+.n8n-chat__toggle {
+  visibility: visible !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+.n8n-chat__window {
+  z-index: 10000 !important;
+}
+
+.n8n-chat__input {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.n8n-chat__input textarea {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.n8n-chat__footer {
+  display: flex !important;
+  opacity: 1 !important;
+}
